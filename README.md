@@ -21,6 +21,14 @@
 
 ### Install
 
+(目前还没上传至Pypi(咱太废物力xwx 整不来www))
+
 ```dos
 git https://github.com/BuDingOwO/Nonebot-Plugin-Poke.git
 ```
+可用命令:
+
+1. 戳我
+2. 戳<@qq>
+
+默认一次戳5下,每下间隔1s.
