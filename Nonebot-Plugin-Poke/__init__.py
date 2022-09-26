@@ -11,6 +11,7 @@ from nonebot.adapters.onebot.v11 import MessageEvent, Event, Bot
 from nonebot.params import State
 from typing import Union
 import json
+import random
 
 global_config = get_driver().config
 config = Config.parse_obj(global_config)
@@ -64,7 +65,7 @@ async def poke(event: Event, matcher: Matcher, arg: Message = CommandArg()):
     at = MessageSegment.at(user_id=user_id)
 
     await matcher.send(at + MessageSegment.face(28) + MessageSegment.face(109) +
-                        MessageSegment.face(183) + "rua死你！！！")
+                       MessageSegment.face(183) + "rua死你！！！")
     arg = arg.extract_plain_text()
     if not arg == "":
         try:
@@ -74,7 +75,13 @@ async def poke(event: Event, matcher: Matcher, arg: Message = CommandArg()):
 
         if IntArg == 0:
             await matcher.finish("让我戳0下是罢！！")
-        count = IntArg
+
+        elif IntArg > 20:
+            Random_key = random.randint(1, 10)
+            await matcher.send(f"戳这么多下爪爪会断掉的叭，那还是戳{Random_key}下叭~ UwU")
+            count = Random_key
+        else:
+            count = IntArg
     else:
         count = 5
     # poke = MessageSegment.poke(type_="poke", id_=str(user_id))
@@ -118,7 +125,12 @@ async def user_id_from_at(event: MessageEvent or Event, matcher: Matcher, arg: M
 
         if IntArg == 0:
             await matcher.finish("让我戳0下是罢！！")
-        count = IntArg
+        elif IntArg > 20:
+            Random_key = random.randint(1, 10)
+            await matcher.send(f"戳这么多下爪爪会断掉的叭，那还是戳{Random_key}下叭~ UwU")
+            count = Random_key
+        else:
+            count = IntArg
     else:
         count = 5
     # poke = MessageSegment.poke(type_="poke", id_=str(user_id))
