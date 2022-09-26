@@ -67,7 +67,7 @@ async def poke(event: Event, matcher: Matcher, arg: Message = CommandArg()):
     await matcher.send(at + MessageSegment.face(28) + MessageSegment.face(109) +
                        MessageSegment.face(183) + "rua死你！！！")
     arg = arg.extract_plain_text()
-    if not arg == "":
+    if not arg.replace(" ", "") == "":
         try:
             IntArg = int(str(arg))
         except ValueError:
@@ -117,7 +117,7 @@ async def user_id_from_at(event: MessageEvent or Event, matcher: Matcher, arg: M
         await matcher.send(at + MessageSegment.face(28) + MessageSegment.face(109) +
                            MessageSegment.face(183) + "rua死你！！！")
         arg = arg.extract_plain_text()
-    if not arg == "":
+    if not arg.replace(" ", "") == "":
         try:
             IntArg = int(str(arg))
         except ValueError:
