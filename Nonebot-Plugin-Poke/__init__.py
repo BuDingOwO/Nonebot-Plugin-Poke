@@ -58,18 +58,31 @@ matcher = on_command("戳我", priority=5, block=False)
 
 
 @matcher.handle()
-async def poke(event: Event, matcher: Matcher):
+async def poke(event: Event, matcher: Matcher, arg: Message = CommandArg()):
     user_id = event.get_user_id()
-
+    IntArg = 0
     at = MessageSegment.at(user_id=user_id)
-    poke = MessageSegment.poke(type_="poke", id_=str(user_id))
-    # poke = f'[CQ:poke,qq={user_id}]'
-    await atname.send(at + MessageSegment.face(28) + MessageSegment.face(109) +
-                      MessageSegment.face(183) + "rua死你！！！")
-    count = 0
-    while count <= 8:
+
+    await matcher.send(at + MessageSegment.face(28) + MessageSegment.face(109) +
+                        MessageSegment.face(183) + "rua死你！！！")
+    arg = arg.extract_plain_text()
+    if not arg == "":
+        try:
+            IntArg = int(str(arg))
+        except ValueError:
+            await matcher.finish(";w; 只能是数字哦~")
+
+        if IntArg == 0:
+            await matcher.finish("让我戳0下是罢！！")
+        count = IntArg
+    else:
+        count = 5
+    # poke = MessageSegment.poke(type_="poke", id_=str(user_id))
+    poke = f'[CQ:poke,qq={user_id}]'
+    temp_count = 0
+    while not temp_count == count:
         await matcher.send(poke)
-        count = count + 2
+        temp_count = temp_count + 1
         time.sleep(1)
 
 
@@ -81,21 +94,37 @@ async def _checker_(bot: Bot, event: Event, state: T_State) -> bool:
     return True if 'CQ:at' in msg else False
 
 
-atname = on_command("戳", priority=5, rule=Rule(_checker_), block=False)
+atname = on_command("戳", priority=5, block=False)
 
 
 @atname.handle()
-async def user_id_from_at(event: MessageEvent or Event, matcher: Matcher):
-    user_id = get_at_user_id(event.json())[0]
-    at = MessageSegment.at(user_id=user_id)
-    poke = MessageSegment.poke(type_="poke", id_=str(user_id))
-    # poke = f'[CQ:poke,qq={user_id}]'
+async def user_id_from_at(event: MessageEvent or Event, matcher: Matcher, arg: Message = CommandArg()):
+    msg = str(event.get_message())
+    IntArg = 0
+    user_id = 0
+    if 'CQ:at' in msg:
+        user_id = get_at_user_id(event.json())[0]
+        at = MessageSegment.at(user_id=user_id)
+        # poke = f'[CQ:poke,qq={user_id}]'
 
-    await matcher.send(at + MessageSegment.face(28) + MessageSegment.face(109) +
-                       MessageSegment.face(183) + "rua死你！！！")
+        await matcher.send(at + MessageSegment.face(28) + MessageSegment.face(109) +
+                           MessageSegment.face(183) + "rua死你！！！")
+        arg = arg.extract_plain_text()
+    if not arg == "":
+        try:
+            IntArg = int(str(arg))
+        except ValueError:
+            await matcher.finish(";w; 只能是数字哦~")
 
-    count = 0
-    while count <= 8:
+        if IntArg == 0:
+            await matcher.finish("让我戳0下是罢！！")
+        count = IntArg
+    else:
+        count = 5
+    # poke = MessageSegment.poke(type_="poke", id_=str(user_id))
+    poke = f'[CQ:poke,qq={user_id}]'
+    temp_count = 0
+    while not temp_count == count:
         await matcher.send(poke)
-        count = count + 2
+        temp_count = temp_count + 1
         time.sleep(1)
