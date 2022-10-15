@@ -1,7 +1,7 @@
 <div align="center" >
   <img height="128" src="https://cdn.jsdelivr.net/gh/BuDingOwO/BuDingOwO@master/Picture/Overview-IMG.gif" alt="">
 </div>
-<h3 align="center" >Nonebot-Poke</h3>
+<h3 align="center" >Nonebot-Plugin-Poke</h3>
 <h4 align="center">戳一戳</h4>
 <div align="center" >
   <a href="https://raw.githubusercontent.com/BuDingOwO/Nonebot-Plugin-Poke/master/LICENSE"></a>&emsp;
@@ -27,8 +27,9 @@
 git https://github.com/BuDingOwO/Nonebot-Plugin-Poke.git
 ```
 可用命令:
+<必选参数>[可选参数]
 
-1. 戳我
-2. 戳<@qq>
+1. 戳我[次数]
+2. 戳<@qq>[次数]
 
-默认一次戳5下,每下间隔1s.
+默认不带参数一次戳5下,每下间隔1s.
