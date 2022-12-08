@@ -85,7 +85,8 @@ async def poke(event: Event, matcher: Matcher, arg: Message = CommandArg()):
     else:
         count = 5
     # poke = MessageSegment.poke(type_="poke", id_=str(user_id))
-    poke = f'[CQ:poke,qq={user_id}]'
+    poke = MessageSegment("poke", {"qq": user_id})
+    # poke = f'[CQ:poke,qq={user_id}]'
     temp_count = 0
     while not temp_count == count:
         await matcher.send(poke)
@@ -134,7 +135,8 @@ async def user_id_from_at(event: MessageEvent or Event, matcher: Matcher, arg: M
     else:
         count = 5
     # poke = MessageSegment.poke(type_="poke", id_=str(user_id))
-    poke = f'[CQ:poke,qq={user_id}]'
+    poke = MessageSegment("poke", {"qq": user_id})
+    # poke = f'[CQ:poke,qq={user_id}]'
     temp_count = 0
     while not temp_count == count:
         await matcher.send(poke)
